@@ -7,11 +7,11 @@
     .controller('MainCtrl', MainCtrl);
     
     /* @ngInject */
-    function MainCtrl($http, $document, pageService) {
+    function MainCtrl($http, $element, pageService) {
       var self = this;
 
       // use this hack, because ng-keydown, ng-keypress don't work in IE11+
-      $($document).on(('keyup input', '.search__input', bspClick)
+      $($element).find('.search__input').on('keyup', bspClick)
 
       // Loading indicator
       self.loading = false;
