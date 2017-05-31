@@ -28,7 +28,7 @@ div(ng-hide='$ctrl.appData.issueArr.length === 0')
     ul.issues__list
       li.issues__item(ng-repeat='item in $ctrl.showIssues()')
         p.text
-          span {{item.number}}
+          span {{item.number}}&nbsp;
           span {{item.title}}
           |  (
           a.issues__href(ui-sref='add-info({index: $ctrl.getIssueIndex($index)})') read...
