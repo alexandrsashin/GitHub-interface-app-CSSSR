@@ -1,0 +1,55 @@
+.flex-container.app-panel
+  .flex-container__item.app-panel__search
+    .flex-container__sub-item
+      label(for='search') Введите логин и название репозитория:
+    .flex-container__sub-item.search
+      input#search.search__input(type='text', ng-model='$ctrl.appData.search')
+      button.btn.search__btn(ng-click="$ctrl.getIssues('search', $ctrl.appData.search)")
+        | Поиск
+      .search__hint-block(ng-show='$ctrl.appData.repoList.length !== 0 && !$ctrl.appData.repo')
+        .search__hint(ng-click="$ctrl.getIssues('repo', item)", ng-repeat='item in $ctrl.appData.repoList | filter: $ctrl.searchFilter') {{$ctrl.appData.name}} {{item}}
+  .flex-container__item.app-panel__page
+    .flex-container__sub-item Текущая страница:
+    .flex-container__sub-item.app-panel__page-number(ng-bind='$ctrl.appData.currentPage')
+  .flex-container__item.app-panel__items-number
+    .flex-container__sub-item Issues на странице:
+    .flex-container__sub-item.app-panel__items-input-box
+      input.app-panel__items-input(type='text', maxlength='2', ng-model='$ctrl.appData.issueNumber')
+.text
+  | Логин: 
+  span(ng-bind='$ctrl.appData.name')
+  span(ng-show='$ctrl.appData.errorUser') (Not Found)
+.text
+  | Репозиторий: 
+  span(ng-bind='$ctrl.appData.repo')
+  span(ng-show='$ctrl.appData.errorRepo') (Not Found)
+div(ng-hide='$ctrl.appData.issueArr.length === 0')
+  .issues
+    ul.issues__list
+      li.issues__item(ng-repeat='item in $ctrl.showIssues()')
+        p.text
+          span {{item.number}}
+          span {{item.title}}
+          |  (
+          a.issues__href(ui-sref='add-info({index: $ctrl.getIssueIndex($index)})') read...
+          | )
+        p.text.text_comment {{item.created_at | date:'yyyy-MM-dd HH:mm:ss'}}
+        .comment.issues__comment
+          .comment__img-wrapper
+            img.comment__img(width='40', alt='{{item.user.login}}', ng-src='{{item.user.avatar_url}}')
+          .comment__user
+            p.comment__user-login {{item.user.login}}
+            a.comment__user-url(href='{{item.user.html_url}}', target='_blank', ng-bind='item.user.html_url')
+  ul.pagination
+    li.pagination__item(ng-class="{'disabled': $ctrl.appData.currentPage === 1}", ng-click='$ctrl.appData.currentPage = 1')
+      | <<
+    li.pagination__item(ng-class="{'disabled': $ctrl.appData.currentPage === 1}", ng-click='$ctrl.appData.currentPage = $ctrl.appData.currentPage - 1')
+      | <
+    li.pagination__item(ng-bind='page + 1', ng-hide='$ctrl.appData.currentPage > page + 3 || $ctrl.appData.currentPage < page - 2', ng-class="{'active': $ctrl.appData.currentPage - 1 == page}", ng-click='$ctrl.appData.currentPage = page + 1', ng-repeat='page in $ctrl.getPagination()')
+    li.pagination__item(ng-class="{'disabled': $ctrl.appData.currentPage === $ctrl.appData.totalPages}", ng-click='$ctrl.appData.currentPage = $ctrl.appData.currentPage + 1')
+      | >
+    li.pagination__item(ng-class="{'disabled': $ctrl.appData.currentPage === $ctrl.appData.totalPages}", ng-click='$ctrl.appData.currentPage = $ctrl.appData.totalPages')
+      | >>
+.text(ng-show='$ctrl.appData.issueArr.length === 0 && $ctrl.appData.repo') Список issues пустой.
+.loading(ng-show='$ctrl.loading')
+  .loading__loader

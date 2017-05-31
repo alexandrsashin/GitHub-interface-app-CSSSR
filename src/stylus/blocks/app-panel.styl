@@ -1,0 +1,42 @@
+.app-panel__page
+  width: 50%
+.app-panel__page-number
+  width: 100%
+  padding: 22px 0 0px
+  text-align: left
+.app-panel__search
+  width: 100%
+.app-panel__search-hint-block
+  position: absolute
+  top: 33px
+  width: calc(100% - 69px)
+  border: 1px solid #ddd
+.app-panel__search-hint
+  padding: 2px 6px
+  background: #fff
+  cursor: pointer
+.app-panel__search-hint:hover
+  background: #eee
+.app-panel__items-number
+  width: 50%
+.app-panel__items-input
+  width: 50px
+  height: 32px
+  text-align: center
+@media (min-width: 768px)
+  .app-panel__page
+    order: 0
+    width: 170px
+  .app-panel__page-number
+    padding: 5px 14px 10px 0
+    text-align: center
+  .app-panel__search
+    order: 1
+    width: calc(100% - 340px)
+  .app-panel__items-number
+    order: 2
+    width: 170px
+  .app-panel__items-input-box
+    width: 100%
+    padding-right: 14px
+    text-align: center

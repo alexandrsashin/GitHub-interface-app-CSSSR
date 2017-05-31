@@ -1,0 +1,54 @@
+table.custom-table
+  tr.custom-table__row
+    td.custom-table__cell(colspan='2')
+      span.custom-table__subtitle Issue
+  tr.custom-table__row
+    td.custom-table__cell
+      | title:
+    td.custom-table__cell
+      span(ng-bind='$ctrl.appData.issueArr[$ctrl.index].title')
+  tr.custom-table__row
+    td.custom-table__cell
+      | id:
+    td.custom-table__cell
+      span(ng-bind='$ctrl.appData.issueArr[$ctrl.index].id')
+  tr.custom-table__row
+    td.custom-table__cell
+      | number:
+    td.custom-table__cell
+      span(ng-bind='$ctrl.appData.issueArr[$ctrl.index].number')
+  tr.custom-table__row
+    td.custom-table__cell
+      | state:
+    td.custom-table__cell
+      span(ng-bind='$ctrl.appData.issueArr[$ctrl.index].state')
+  tr.custom-table__row
+    td.custom-table__cell
+      | created:
+    td.custom-table__cell
+      span(ng-bind="$ctrl.appData.issueArr[$ctrl.index].created_at | date:'yyyy-MM-dd HH:mm:ss'")
+  tr.custom-table__row
+    td.custom-table__cell
+      | updated:
+    td.custom-table__cell
+      span(ng-bind="$ctrl.appData.issueArr[$ctrl.index].updated_at | date:'yyyy-MM-dd HH:mm:ss'")
+  tr.custom-table__row
+    td.custom-table__cell
+      | comments:
+    td.custom-table__cell
+      span(ng-bind='$ctrl.appData.issueArr[$ctrl.index].comments')
+  tr.custom-table__row
+    td.custom-table__cell(colspan='2')
+      span.custom-table__subtitle User
+  tr.custom-table__row
+    td.custom-table__cell
+      | login:
+    td.custom-table__cell
+      span(ng-bind='$ctrl.appData.issueArr[$ctrl.index].user.login')
+  tr.custom-table__row
+    td.custom-table__cell
+      | url:
+    td.custom-table__cell
+      a(href='{{$ctrl.appData.issueArr[$ctrl.index].user.html_url}}', target='_blank', ng-bind='$ctrl.appData.issueArr[$ctrl.index].user.html_url')
+.btn-box
+  button.btn(ui-sref='main') На главную
